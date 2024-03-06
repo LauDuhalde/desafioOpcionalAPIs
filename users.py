@@ -1,3 +1,5 @@
+##Solicitudes responden ok, pero realmente no actualizan los datos por lo que el get no refleja las operaciones
+##Se imprimen variables JSON para "verificar"
 import requests
 import json
 
@@ -10,6 +12,8 @@ if response.status_code == 200:
     print("La solicitud GET fue exitosa")
     #1
     users_data = response.json().get("data")
+    print(users_data)
+    print("--------------------------------------------\n")
 
     #2
     new_user={
