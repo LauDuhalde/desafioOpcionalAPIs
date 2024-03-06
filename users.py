@@ -18,7 +18,11 @@ if response.status_code == 200:
     }
     
     created_user=users_data.copy()
-    created_user.append(new_user)
+    #created_user.append(new_user)
+    response = requests.post(url, json=new_user)
+    if response.status_code == 201:
+        print("La solicitud POST fue exitosa")
+        created_user = requests.get(url).json().get("data")
     print(created_user)
     print("--------------------------------------------\n")
 
@@ -27,6 +31,10 @@ if response.status_code == 200:
     for user in updated_user:
         if user.get("first_name") == "Emma":
             user["residence"] = "zion"
+            response = requests.put(url+"/"+str(user["id"]), json=user)
+            if response.status_code == 200:
+                print("La solicitud PUT fue exitosa")
+                updated_user = requests.get(url).json().get("data")
             break
     print(updated_user)
     print("--------------------------------------------\n")
@@ -35,7 +43,10 @@ if response.status_code == 200:
     remove_user=users_data.copy()
     for user in remove_user:
         if user["first_name"] == "Tracey":
-            remove_user.remove(user)
+            response = requests.delete(url+"/"+str(user["id"]))
+            if response.status_code == 204:
+                print("La solicitud DELETE fue exitosa")
+                remove_user = requests.get(url).json().get("data")
             break
     print(remove_user)
     print("--------------------------------------------\n")
