@@ -25,7 +25,7 @@ if response.status_code == 200:
     #created_user.append(new_user)
     response = requests.post(url, json=new_user)
     if response.status_code == 201:
-        print("La solicitud POST fue exitosa")
+        print("La solicitud POST fue exitosa, ID Nuevo usuario:",response.json().get("id"))
         created_user = requests.get(url).json().get("data")
     print(created_user)
     print("--------------------------------------------\n")
