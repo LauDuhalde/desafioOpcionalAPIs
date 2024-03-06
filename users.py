@@ -16,26 +16,30 @@ if response.status_code == 200:
         "first_name": "Ignacio",
         "job":"Profesor"
     }
-    users_data.append(new_user)
+    
     created_user=users_data.copy()
+    created_user.append(new_user)
     print(created_user)
     print("--------------------------------------------\n")
 
     #3 (no existe morpheus, así que actualicé a Emma)
-    for user in users_data:
+    updated_user=users_data.copy()
+    for user in updated_user:
         if user.get("first_name") == "Emma":
             user["residence"] = "zion"
-            updated_user=users_data.copy()
-            print(updated_user)
-            print("--------------------------------------------\n")
             break
+    print(updated_user)
+    print("--------------------------------------------\n")
+    
     #4    
-    for user in users_data:
+    remove_user=users_data.copy()
+    for user in remove_user:
         if user["first_name"] == "Tracey":
-            users_data.remove(user)
-            print(users_data)
-            print("--------------------------------------------\n")
+            remove_user.remove(user)
             break
+    print(remove_user)
+    print("--------------------------------------------\n")
+    
 elif response.status_code == 404:
     print("La solicitud GET falló: recurso no encontrado")
 else:
